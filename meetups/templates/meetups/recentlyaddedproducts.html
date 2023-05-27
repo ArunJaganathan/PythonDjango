@@ -1,0 +1,85 @@
+{% extends 'meetups/base/base.html' %}
+
+{% load static %}
+
+{% block pagetitle %} Recently Added Products {%endblock%}    
+{% block body_content %}
+
+
+<div class="content-wrapper">
+    <!-- Content Header (Page header) -->
+    <section class="content-header">
+      <div class="container-fluid">
+        <div class="row mb-2">
+          <div class="col-sm-6">
+            <h1>Recently Added Products</h1>
+          </div>
+          <div class="col-sm-6">
+            <ol class="breadcrumb float-sm-right">
+              <li class="breadcrumb-item"><a href="/meetups/">Home</a></li>
+              <li class="breadcrumb-item active">Recently Added Products</li>
+            </ol>
+          </div>
+        </div>
+      </div><!-- /.container-fluid -->
+    </section>
+
+    <!-- Main content -->
+    <section class="content">
+      <div class="container-fluid">
+        <div class="row">
+          <div class="col-12">
+            <div class="card">
+              <div class="card-header">
+                <h3 class="card-title">DataTable with default features</h3>
+              </div>
+              <!-- /.card-header -->
+              <div class="card-body">
+                <table id="example1" class="table table-bordered table-striped">
+                  <thead>
+                  <tr>
+                    <th>Product Name</th>
+                    <th>Rate</th>
+                    <th>Details(s)</th>
+                    <th>Status</th>                    
+                  </tr>
+                  </thead>
+                  <tbody>  
+                    {% for recent_product in recent_products %}               
+                    <tr>
+                        <td>{{recent_product.title}}</td>
+                        <td>{{recent_product.rate}}</td>
+                        <td>{{recent_product.description}}</td>
+                        <td> 
+                            {%if recent_product.status == 1 %}
+                            <span class="badge badge-success">Active</span>
+                            {%elif recent_product.status == 2 %}
+                            <span class="badge badge-warning">Draft</span>                        
+                            {%elif recent_product.status == 3 %}
+                            <span class="badge badge-danger">In Active</span>
+                            {%else%}
+                            <span class="badge badge-info">Processing</span>
+                            {%endif%}
+                        </td>
+                        
+                      </tr>
+                      {%endfor%}
+                  </tbody>                  
+                </table>
+              </div>
+              <!-- /.card-body -->
+            </div>
+            <!-- /.card -->
+          </div>
+          <!-- /.col -->
+        </div>
+        <!-- /.row -->
+      </div>
+      <!-- /.container-fluid -->
+    </section>
+    <!-- /.content -->
+  </div>
+
+
+
+  {%endblock%}
